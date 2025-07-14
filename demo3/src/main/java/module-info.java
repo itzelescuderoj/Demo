@@ -5,6 +5,7 @@ module mx.edu.utez.demo3 {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires java.desktop;
 
     opens mx.edu.utez.demo3 to javafx.fxml;
     opens mx.edu.utez.demo3.controller to javafx.fxml;
