@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UsuarioDaoImpl implements IUsuarioDao {
     @Override
     public boolean login(String correo, String pass) throws SQLException {
-        String sql="SELECT ID,CORREO,PASS FROM USUARIOS WHERE CORREO=? AND PASS=?";
+        String sql="SELECT ID,CORREO,PASS FROM USUARIO WHERE CORREO=? AND PASS=?";
        try {
            Connection con = DBConnection.getConnection();//Establcer conexion
            PreparedStatement ps = con.prepareStatement(sql); //Prepara la consulta para evitar inyeccion sql

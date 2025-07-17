@@ -67,16 +67,54 @@ public class AlumnoDaoImpl implements IAlumnoDao {
 
     @Override
     public void create(Alumno alumno) throws SQLException {
-
+        String query = "INSERT INTO ALUMNO (NOMBRES, APELLIDOS, CORREO, FECHA_NACIMIENTO, ID_CARRERA) VALUES (?, ?, ?, ?, ?)";
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, alumno.getNombre());
+            ps.setString(2, alumno.getApellidos());
+            ps.setString(3, alumno.getCorreo());
+            ps.setDate(4, java.sql.Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setInt(5, alumno.getIdCarrera());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                System.out.println("Creado con exito");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void update(Alumno alumno) throws SQLException {
-
+        String query = "UPDATE ALUMNO SET NOMBRES=?, APELLIDOS=?, CORREO=?, FECHA_NACIMIENTO=?, ID_CARRERA=? WHERE ID=?";
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, alumno.getNombre());
+            ps.setString(2, alumno.getApellidos());
+            ps.setString(3, alumno.getCorreo());
+            ps.setDate(4, java.sql.Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setInt(5, alumno.getIdCarrera());
+            ps.setInt(6, alumno.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(int id) throws SQLException {
+        String query = "DELETE FROM ALUMNO WHERE ID=?";
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
