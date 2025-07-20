@@ -51,7 +51,7 @@ public class AlumnoFormController {
         LocalDate fechaNacimiento = dpFechaNacimiento.getValue();
         Carrera carrera = cbCarrera.getSelectionModel().getSelectedItem();
         if(nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || fechaNacimiento == null || carrera == null){
-        showAlert("Error", "TODOS LOS CAMPOS SON REQUERIDOS");
+        showAlert("Error", "Todos los campos son requeridos");
             System.out.println("Todos los campos son obligatorios");
         return;
         }

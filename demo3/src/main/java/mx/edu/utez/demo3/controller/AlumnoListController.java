@@ -126,5 +126,18 @@ public class AlumnoListController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    private void volverADashboard(javafx.event.ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/mx/edu/utez/demo3/view/Dashboard.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

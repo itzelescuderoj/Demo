@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class DashboardController {
+public class
+DashboardController {
 
     @FXML
     private void onAlumnos(ActionEvent event){
@@ -21,6 +22,37 @@ public class DashboardController {
             Scene scene=new Scene(loader.load());
             Stage stage= (Stage) ((Node) event.getSource() ).getScene().getWindow();
             stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    private void onCarrera(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/mx/edu/utez/demo3/view/carrera_list.fxml")
+        );
+        try {
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            System.out.println("Ingreso carrera");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private void onAsignatura(ActionEvent event){
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/mx/edu/utez/demo3/view/asignatura_list.fxml")
+        );
+        try {
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            System.out.println("Ingreso asignatura");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
