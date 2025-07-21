@@ -13,7 +13,8 @@
 
     <top>
         <HBox fx:id="navbar" styleClass="navbar" spacing="10">
-            <Button fx:id="btnBack" text="IR A DASHBOARD" />
+            <Button text="Dashboard" onAction="#onVolverADashboard"/>
+
         </HBox>
     </top>
 

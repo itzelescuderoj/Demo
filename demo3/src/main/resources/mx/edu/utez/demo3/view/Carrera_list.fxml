@@ -13,18 +13,18 @@
 
     <top>
         <HBox fx:id="navbar" styleClass="navbar" spacing="10">
-            <Button text="Ir a Dashboard" styleClass="nav-btn" onAction="#iraDashboar"/>
+            <Button text="Dashboard" onAction="#onVolverADashboard"/>
         </HBox>
     </top>
 
     <center>
         <VBox spacing="10" alignment="TOP_CENTER">
-            <Button fx:id="btnCreate" text="CREAR CARRERA" styleClass="nav-btn" onAction="#onCrearCarrera"/>
-            <TableView fx:id="tableCarreras" prefWidth="580">
+            <Button text="Agregar Carrera" onAction="#onCrearCarrera"/>
+            <TableView fx:id="tableCarrera" prefWidth="580">
                 <columns>
                     <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
                     <TableColumn fx:id="colNombre" text="Nombre" prefWidth="300"/>
-                    <TableColumn fx:id="colAcciones" text="" prefWidth="150"/>
+                    <TableColumn fx:id="colDescripcion" text="" prefWidth="150"/>
                 </columns>
             </TableView>
         </VBox>

@@ -22,7 +22,7 @@ public class DBConnection {
     }
 
     public static void main(String[] args) throws SQLException {
-        try (Connection conn = getConnection()) {
+        try (Connection ignored = getConnection()) {
             System.out.println("¡Conexión exitosa!");
         } catch (SQLException e) {
             e.printStackTrace();

@@ -2,6 +2,7 @@ package mx.edu.utez.demo3.controller;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,72 +30,51 @@ import java.util.ResourceBundle;
 public class CarreraListController implements Initializable {
 
     @FXML
-    private TableView<Carrera> tblCarreras;
-
-    @FXML
-    private TableColumn<Carrera, Integer> colId;
-
+    private TableView<Carrera> tableCarrera;
     @FXML
     private TableColumn<Carrera, String> colNombre;
-
     @FXML
     private TableColumn<Carrera, String> colDescripcion;
 
     @FXML
-    private Button btnAgregar;
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colNombre.setCellValueFactory(data ->
+                new ReadOnlyStringWrapper(String.valueOf(data.getValue().getNombre())));
+        colDescripcion.setCellValueFactory(data ->
+                new ReadOnlyStringWrapper(String.valueOf(data.getValue().getDescrpcion()))); // cuidado con el nombre del método
+        loadCarreras();
+    }
 
     @FXML
-    private Button btnDashboard;
-
-    private final CarreraDaoImpl carreraDao = new CarreraDaoImpl();
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        onCrearCarrera();
-
-        btnAgregar.setOnAction(event -> mostrarFormulario(event));
-        btnDashboard.setOnAction(event -> iraDashboar(event));
-    }
-
-    private void onCrearCarrera() {
+    private void onCrearCarrera(ActionEvent event){
         try {
-            List<Carrera> carreras = carreraDao.findAll();
-            tblCarreras.setItems(FXCollections.observableArrayList(carreras));
-        } catch (Exception e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/edu/utez/demo3/view/Carrera_form.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void mostrarFormulario(javafx.event.ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/mx/edu/utez/demo3/view/CarreraForm.fxml")
-            );
-            Parent root = loader.load();
 
-            Stage dialog = new Stage();
-            dialog.setTitle("Nueva Carrera");
-            dialog.setScene(new Scene(root));
-            dialog.initOwner(((Node) event.getSource()).getScene().getWindow());
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.showAndWait();
-            onCrearCarrera();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void iraDashboar(ActionEvent actionEvent) {
+    @FXML
+    private void onVolverADashboard(ActionEvent event){
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/mx/edu/utez/demo3/view/Dashboard.fxml")
             );
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadCarreras (){
+        try {
+            List<Carrera> carreras = new CarreraDaoImpl().findAll();
+            tableCarrera.setItems(FXCollections.observableList(carreras));
         } catch (Exception e) {
             e.printStackTrace();
         }

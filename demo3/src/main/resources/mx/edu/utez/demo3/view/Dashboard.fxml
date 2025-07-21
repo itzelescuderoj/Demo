@@ -25,8 +25,8 @@
     <center>
         <HBox fx:id="navButtons" alignment="CENTER" spacing="20">
         <Button fx:id="btnAlumno" text="Alumno" styleClass="nav-btn" onAction="#onAlumnos"/>
-        <Button fx:id="btnCarrera" text="Carrera" styleClass="nav-btn"/>
-        <Button fx:id="btnAsignatura" text="Asignatura" styleClass="nav-btn"/>
+            <Button fx:id="btnCarrera" text="Carrera" styleClass="nav-btn" onAction="#onCarrera"/>
+            <Button fx:id="btnAsignatura" text="Asignatura" styleClass="nav-btn"/>
         </HBox>
 
     </center>

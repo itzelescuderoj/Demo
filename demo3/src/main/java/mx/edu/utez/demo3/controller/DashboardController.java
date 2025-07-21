@@ -29,19 +29,16 @@ DashboardController {
     }
     @FXML
     private void onCarrera(ActionEvent event){
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/mx/edu/utez/demo3/view/carrera_list.fxml")
-        );
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx/edu/utez/demo3/view/Carrera_list.fxml"));
         try {
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            System.out.println("Ingreso carrera");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
+
 
     @FXML
     private void onAsignatura(ActionEvent event){
